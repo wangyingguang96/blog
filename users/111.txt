@@ -1,0 +1,1 @@
+{"username":"111","psw":"123456","email":"1790137994@qq.com","sex":"女","registerDate":1530614327426,"avatar":"uploads/111.jpg"}

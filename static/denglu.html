@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>博客系统</title>
+
+    <link href="yinru/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="yinru/jqery-3.3.1.js"></script>
+    <script src="yinru/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="yinru/jquery.cookie.js"></script>
+    <script src="yinru/jquery.form.js"></script>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        form {
+            width: 1200px;
+            height: 200px;
+            margin: 70px auto;
+        }
+
+        input[type='submit'] {
+            width: 1200px;
+            height: 40px;
+            color: white;
+            border-radius: 3px;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
+        <div class="container-fluid  center-block" style="width: 1200px;">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" id="fanhui_click" style="font-size: 16px">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    返回
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                <ul class="nav navbar-nav navbar-right" style="font-size: 16px">
+                    <li>
+                        <a href="resigter.html">
+                            <span class="glyphicon glyphicon-th-large"></span>
+                            注册</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <form action="">
+        <div class="form-group">
+            <label for="name">用户名</label>
+            <input type="text" class="form-control" placeholder="请输入帐号" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="name">密码</label>
+            <input type="password" class="form-control" placeholder="请输入密码" name="psw" required>
+        </div>
+        <input type="submit" class="btn btn-success btn-lg" value="提交">
+    </form>
+
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+                </div>
+                <div class="modal-body">在这里添加一些文本</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+
+</body>
+<script>
+    $(function () {
+        $('#fanhui_click').click(function () {
+            history.back();
+        })
+
+        $('form').submit(function (e) {
+            e.preventDefault();
+            $.post('/user/login', $('form').serialize(), (response) => {
+                if (response.result == 1) {
+                    var msg = response.result = 1 ? '恭喜您，登陆成功' : response.msg;
+                    $('#myModal').find('.modal-body').html(msg).end().modal('show').on('hidden.bs.modal', function () {
+                        $.cookie('username',$('input[name=username]').val());
+                        location.href = 'index.html';
+                    })
+                }
+                else{
+                    $('#myModal').find('.modal-body').html(response.msg).end().modal('show')
+                }
+            })
+        })
+    })
+
+</script>
+
+</html>

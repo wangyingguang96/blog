@@ -1,0 +1,1 @@
+{"username":"gg","psw":"123456","email":"1790137994@qq.com","sex":"男","registerDate":1530797698273,"avatar":"uploads/gg.jpg"}

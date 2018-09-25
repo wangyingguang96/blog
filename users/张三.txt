@@ -1,0 +1,1 @@
+{"username":"张三","psw":"123456","email":"1790137994@qq.com","sex":"男","registerDate":1530714594135,"avatar":"uploads/张三.jpg"}
